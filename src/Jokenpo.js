@@ -5,14 +5,14 @@ import pedra from './assets/images/pedra.png'
 
 
 export default function Jokenpo() {
-    const rodadaInicial = {
+    const placarInicial = {
         usuario: 0,
         computador: 0,
         empate: 0
     }
-    const [jogadaUsuario, setJogadaUsuario] = useState("")
-    const [jogadaComputador, setjogadaComputador] = useState("");
-    const [rodadaVencida, setRodadaVencida] = useState(rodadaInicial);
+    const [jogadaUsuario, setJogadaUsuario] = useState();
+    const [jogadaComputador, setjogadaComputador] = useState();
+    const [placar, setPlacar] = useState(placarInicial);
 
     const jogadas = [{
         nome: "tesoura",
@@ -49,20 +49,24 @@ export default function Jokenpo() {
         let indexRandomico = Math.floor(Math.random() * 3);
         setjogadaComputador(jogadas[indexRandomico].nome);
     }
+    const resetarPlacar = () => {
+        setPlacar(placarInicial);
+    }
     const comparaJogadas = () => {
+        // Esse && é por que o useEffect inicializa uma jogada no incicio, entao o && é para validar se nao é null
         if (jogadaUsuario === jogadaComputador && jogadaUsuario && jogadaComputador) {
             //Empate
-            setRodadaVencida({ ...rodadaVencida, empate: rodadaVencida.empate += 1 });
+            setPlacar({ ...placar, empate: placar.empate += 1 });
         }
         formasDeVencer.forEach((forma) => {
 
             if (forma.jogador1 == jogadaUsuario && forma.jogador2 == jogadaComputador) {
                 console.log(forma.vencedor);
-                setRodadaVencida({ ...rodadaVencida, usuario: rodadaVencida.usuario += 1 })
+                setPlacar({ ...placar, usuario: placar.usuario += 1 })
             }
             if (forma.jogador1 == jogadaComputador && forma.jogador2 == jogadaUsuario) {
                 console.log(forma.vencedor);
-                setRodadaVencida({ ...rodadaVencida, computador: rodadaVencida.computador += 1 })
+                setPlacar({ ...placar, computador: placar.computador += 1 })
             }
 
         })
@@ -71,9 +75,9 @@ export default function Jokenpo() {
     return (
         <>
             <div>
-                {`Usuario > ${rodadaVencida.usuario}  `}
-                {`Computador > ${rodadaVencida.computador} `}
-                {`Empate > ${rodadaVencida.empate} `}
+                {`Usuario > ${placar.usuario}  `}
+                {`Computador > ${placar.computador} `}
+                {`Empate > ${placar.empate} `}
 
 
                 <div className='container-jogadas'>
@@ -93,6 +97,7 @@ export default function Jokenpo() {
 
                 {"jogadaUsuario > " + jogadaUsuario + "  "}
                 {"jogadaComputador > " + jogadaComputador}
+                <button className="btn-reset" onClick={resetarPlacar}> Reset </button>
             </div>
 
         </>
