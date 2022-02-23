@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import tesoura from './assets/images/tesoura.png'
-import papel from './assets/images/papel.png'
-import pedra from './assets/images/pedra.png'
-
+import './assets/css/jokenpo.css'
+import tesoura from './assets/images/tipo3/hand-scissors--v1.png';
+import papel from './assets/images/tipo3/hand.png';
+import pedra from './assets/images/tipo3/clenched-fist.png';
+import imagemComputador from './assets/images/pixel-art-pc.png';
+import farmer from './assets/images/farmer_male.png';
 
 export default function Jokenpo() {
     const placarInicial = {
@@ -10,8 +12,8 @@ export default function Jokenpo() {
         computador: 0,
         empate: 0
     }
-    const [jogadaUsuario, setJogadaUsuario] = useState();
-    const [jogadaComputador, setjogadaComputador] = useState();
+    const [jogadaUsuario, setJogadaUsuario] = useState({ nome: "", src: "" });
+    const [jogadaComputador, setjogadaComputador] = useState({ nome: "", src: "" });
     const [placar, setPlacar] = useState(placarInicial);
 
     const jogadas = [{
@@ -34,37 +36,39 @@ export default function Jokenpo() {
     useEffect(() => {
         //Quando ele setar a jogada do computador, ele compara a rodada
         comparaJogadas();
-        console.log('JogadaUsuario : ' + jogadaUsuario, ' jogadaComputador ' + jogadaComputador);
+        // console.log('JogadaUsuario : ' + jogadaUsuario, ' jogadaComputador ' + jogadaComputador);
     }, [jogadaComputador])
 
     const logicaJogada = (jogada) => {
         if (jogada.nome)
-            setJogadaUsuario(jogada.nome);
+            setJogadaUsuario({ nome: jogada.nome, src: jogada.src });
 
         gerajogadaComputador();
-        // comparaJogadas();
     }
     const gerajogadaComputador = () => {
         // Vai de 0 até 2
         let indexRandomico = Math.floor(Math.random() * 3);
-        setjogadaComputador(jogadas[indexRandomico].nome);
+        setjogadaComputador({ nome: jogadas[indexRandomico].nome, src: jogadas[indexRandomico].src });
+        // depois que ele gera e seta a jogada, o useEffect ativa a funçao comparaJogadas
     }
     const resetarPlacar = () => {
         setPlacar(placarInicial);
     }
     const comparaJogadas = () => {
-        // Esse && é por que o useEffect inicializa uma jogada no incicio, entao o && é para validar se nao é null
-        if (jogadaUsuario === jogadaComputador && jogadaUsuario && jogadaComputador) {
+        // Esse && é por que o useEffect inicializa uma jogada no incicio, entao o && é para validar se nao é null;
+        // Empate
+        if (jogadaUsuario.nome === jogadaComputador.nome && jogadaUsuario.nome && jogadaComputador.nome) {
             //Empate
             setPlacar({ ...placar, empate: placar.empate += 1 });
         }
         formasDeVencer.forEach((forma) => {
-
-            if (forma.jogador1 == jogadaUsuario && forma.jogador2 == jogadaComputador) {
+            //Verifica se o usuario foi vencedor
+            if (forma.jogador1 == jogadaUsuario.nome && forma.jogador2 == jogadaComputador.nome) {
                 console.log(forma.vencedor);
                 setPlacar({ ...placar, usuario: placar.usuario += 1 })
             }
-            if (forma.jogador1 == jogadaComputador && forma.jogador2 == jogadaUsuario) {
+            //Verifica se o computador foi vencedor
+            if (forma.jogador1 == jogadaComputador.nome && forma.jogador2 == jogadaUsuario.nome) {
                 console.log(forma.vencedor);
                 setPlacar({ ...placar, computador: placar.computador += 1 })
             }
@@ -73,12 +77,17 @@ export default function Jokenpo() {
     }
 
     return (
-        <>
-            <div>
-                {`Usuario > ${placar.usuario}  `}
-                {`Computador > ${placar.computador} `}
-                {`Empate > ${placar.empate} `}
+        <section className='section-jogo'>
 
+            <div className='container-jogo'>
+                <p id="lucasmofardini">@lucasmofardini</p>
+                <div className='item-contador'>
+
+                    <p>{`Usuario > ${placar.usuario}  `} </p>
+                    <p>{`Computador > ${placar.computador} `}</p>
+                    <p>{`Empate > ${placar.empate} `}</p>
+                </div>
+                <div className='container-btn-reset'><button className="btn-reset" onClick={resetarPlacar}> Reseta o placar </button></div>
 
                 <div className='container-jogadas'>
                     {jogadas.map((jogada, index) => {
@@ -94,12 +103,27 @@ export default function Jokenpo() {
                     })}
 
                 </div>
+                <div className='item-jogo'>
+                    <div className='container-usuario'>
+                        <div><p>voce:</p></div>
 
-                {"jogadaUsuario > " + jogadaUsuario + "  "}
-                {"jogadaComputador > " + jogadaComputador}
-                <button className="btn-reset" onClick={resetarPlacar}> Reset </button>
+                        <div className="box-pessoa"><img src={farmer} /></div>
+                        <div><p>{jogadaUsuario.nome}</p></div>
+                        <div className="box-img"><img src={jogadaUsuario.src} /></div>
+                    </div>
+                    <div className='container-computador'>
+                        <div><p>computador:</p></div>
+
+                        <div className='box-pc'><img src={imagemComputador} /> </div>
+                        <div><p>{jogadaComputador.nome}</p></div>
+                        <div className="box-img"><img src={jogadaComputador.src} /></div>
+                    </div>
+
+                    {/* {"jogadaUsuario > " + jogadaUsuario + "  "}
+                {"jogadaComputador > " + jogadaComputador} */}
+                </div>
             </div>
 
-        </>
+        </section>
     );
 }
