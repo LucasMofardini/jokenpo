@@ -15,6 +15,7 @@ export default function Jokenpo() {
     const JogadaInicial = { nome: "", src: "" }
     const [jogadaUsuario, setJogadaUsuario] = useState(JogadaInicial);
     const [jogadaComputador, setjogadaComputador] = useState(JogadaInicial);
+    const [vencedor, setVencedor] = useState({ quemVenceu: "", jogadaVencedora: "" });
     const [placar, setPlacar] = useState(placarInicial);
 
     const jogadas = [{
@@ -37,12 +38,12 @@ export default function Jokenpo() {
     useEffect(() => {
         //Quando ele setar a jogada do computador, ele compara a rodada
         comparaJogadas();
-        // console.log('JogadaUsuario : ' + jogadaUsuario, ' jogadaComputador ' + jogadaComputador);
     }, [jogadaComputador])
 
     const logicaJogada = (jogada) => {
-        if (jogada.nome)
+        if (jogada.nome) {
             setJogadaUsuario({ nome: jogada.nome, src: jogada.src });
+        }
 
         gerajogadaComputador();
     }
@@ -68,12 +69,15 @@ export default function Jokenpo() {
             //Verifica se o usuario foi vencedor
             if (forma.jogador1 == jogadaUsuario.nome && forma.jogador2 == jogadaComputador.nome) {
                 console.log(forma.vencedor);
-                setPlacar({ ...placar, usuario: placar.usuario += 1 })
+                setPlacar({ ...placar, usuario: placar.usuario += 1 });
+                setVencedor({ quemVenceu: jogadaUsuario.nome, jogadaVencedora: "Voce" });
             }
             //Verifica se o computador foi vencedor
             if (forma.jogador1 == jogadaComputador.nome && forma.jogador2 == jogadaUsuario.nome) {
                 console.log(forma.vencedor);
-                setPlacar({ ...placar, computador: placar.computador += 1 })
+                setPlacar({ ...placar, computador: placar.computador += 1 });
+                setVencedor({ quemVenceu: jogadaComputador.nome, jogadaVencedora: "Computador" });
+
             }
 
         })
@@ -83,7 +87,7 @@ export default function Jokenpo() {
         <section className='section-jogo'>
 
             <div className='container-jogo'>
-                <p id="lucasmofardini">@lucasmofardini</p>
+                <a target="_blank" href="https://github.com/lucasmofardini"><p id="lucasmofardini">@lucasmofardini</p></a>
                 <div className='container-btn-reset'><button className="btn-reset" onClick={resetarPlacar}> Resetar o placar </button></div>
 
                 <div className='item-contador'>
@@ -104,6 +108,8 @@ export default function Jokenpo() {
                     })}
 
                 </div>
+                {/* <p>{vencedor.quemVenceu}</p>
+                <p>{vencedor.jogadaVencedora}</p> */}
                 <div className='item-jogo'>
                     <div className='container-usuario'>
                         <div><p>voce</p></div>
@@ -113,11 +119,9 @@ export default function Jokenpo() {
                         <div id="box-contador-usuario" className='box-contador-valor'>
                             <p>{` ${placar.usuario}  `} </p>
                         </div>
-
                     </div>
                     <div className='container-computador'>
                         <div><p>computador</p></div>
-
                         <div className='box-pc'><img src={imagemComputador} /> </div>
                         <div><p>{jogadaComputador.nome}</p></div>
                         <div className="box-img"><img src={jogadaComputador.src} /></div>
@@ -128,8 +132,7 @@ export default function Jokenpo() {
 
                     </div>
 
-                    {/* {"jogadaUsuario > " + jogadaUsuario + "  "}
-                {"jogadaComputador > " + jogadaComputador} */}
+
                 </div>
             </div>
 

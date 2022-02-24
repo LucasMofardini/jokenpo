@@ -17,7 +17,6 @@
 }
 img{
     width: 120px;
-    cursor: pointer;
 
     transition: 0.2s linear;
 
@@ -44,6 +43,7 @@ img{
 }
 .item-jogo > div img{
     width: 180px;
+
 }
 .item-jogo > div p{
     text-align: center;
@@ -71,7 +71,7 @@ img{
 }
 .box-img{
     min-width: 180px;
-    min-height: 180px;
+    min-height: 190px;
 }
 .box-img img{
  
@@ -90,6 +90,16 @@ img{
     height: 50px;
     border: 2px solid white;
     cursor: pointer;
+
+    color: var(--color-preto);
+
+    transition: 0.2s linear;
+}
+.container-btn-reset button:hover{
+    background-color: var(--color-preto);
+    border: 2px solid var(--color-preto);
+    border-bottom: 4px solid white;
+    color: white;
 }
 .container-jogadas{
     display:flex;
@@ -97,6 +107,9 @@ img{
     background: var(--color-preto);
     border-bottom: 4px solid white ;
 
+}
+.container-jogadas .item-jogada img{
+    cursor: pointer;
 }
 .box-pc img{
     width: 100px!important;
@@ -111,6 +124,7 @@ img{
     align-items: center;
     font-weight: bold;
     
+    user-select: none;
 
     border-bottom: 4px solid white ;
 }
@@ -124,6 +138,8 @@ img{
     background-color: purple;
     color: white;
     padding: 5px 15px;
+
+    user-select: none;
 }
 #box-contador-usuario{
     position: absolute;
