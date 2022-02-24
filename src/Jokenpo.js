@@ -12,8 +12,9 @@ export default function Jokenpo() {
         computador: 0,
         empate: 0
     }
-    const [jogadaUsuario, setJogadaUsuario] = useState({ nome: "", src: "" });
-    const [jogadaComputador, setjogadaComputador] = useState({ nome: "", src: "" });
+    const JogadaInicial = { nome: "", src: "" }
+    const [jogadaUsuario, setJogadaUsuario] = useState(JogadaInicial);
+    const [jogadaComputador, setjogadaComputador] = useState(JogadaInicial);
     const [placar, setPlacar] = useState(placarInicial);
 
     const jogadas = [{
@@ -53,6 +54,8 @@ export default function Jokenpo() {
     }
     const resetarPlacar = () => {
         setPlacar(placarInicial);
+        setJogadaUsuario(JogadaInicial);
+        setjogadaComputador(JogadaInicial);
     }
     const comparaJogadas = () => {
         // Esse && é por que o useEffect inicializa uma jogada no incicio, entao o && é para validar se nao é null;
