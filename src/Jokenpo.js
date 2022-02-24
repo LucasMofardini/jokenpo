@@ -81,13 +81,11 @@ export default function Jokenpo() {
 
             <div className='container-jogo'>
                 <p id="lucasmofardini">@lucasmofardini</p>
-                <div className='item-contador'>
+                <div className='container-btn-reset'><button className="btn-reset" onClick={resetarPlacar}> Resetar o placar </button></div>
 
-                    <p>{`Usuario > ${placar.usuario}  `} </p>
-                    <p>{`Computador > ${placar.computador} `}</p>
+                <div className='item-contador'>
                     <p>{`Empate > ${placar.empate} `}</p>
                 </div>
-                <div className='container-btn-reset'><button className="btn-reset" onClick={resetarPlacar}> Reseta o placar </button></div>
 
                 <div className='container-jogadas'>
                     {jogadas.map((jogada, index) => {
@@ -105,18 +103,26 @@ export default function Jokenpo() {
                 </div>
                 <div className='item-jogo'>
                     <div className='container-usuario'>
-                        <div><p>voce:</p></div>
-
+                        <div><p>voce</p></div>
                         <div className="box-pessoa"><img src={farmer} /></div>
                         <div><p>{jogadaUsuario.nome}</p></div>
                         <div className="box-img"><img src={jogadaUsuario.src} /></div>
+                        <div id="box-contador-usuario" className='box-contador-valor'>
+                            <p>{` ${placar.usuario}  `} </p>
+                        </div>
+
                     </div>
                     <div className='container-computador'>
-                        <div><p>computador:</p></div>
+                        <div><p>computador</p></div>
 
                         <div className='box-pc'><img src={imagemComputador} /> </div>
                         <div><p>{jogadaComputador.nome}</p></div>
                         <div className="box-img"><img src={jogadaComputador.src} /></div>
+                        <div id="box-contador-computador" className='box-contador-valor'>
+                            <p>{` ${placar.computador} `}</p>
+                        </div>
+
+
                     </div>
 
                     {/* {"jogadaUsuario > " + jogadaUsuario + "  "}

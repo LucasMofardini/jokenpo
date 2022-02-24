@@ -1,16 +1,17 @@
+@import url(./App.css);
 .section-jogo{
     height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: brown;
+    background-color: var(--color-roxo);
     
 }
 .container-jogo{
     border: 4px solid white;
-    filter: drop-shadow(5px 5px 0 black) ;
-
+    /* filter: drop-shadow(5px 5px 0 black) ; */
+    box-shadow: 7px 7px 0 black;
     position: relative;
 
 }
@@ -26,11 +27,12 @@ img{
 
 .item-jogo{
     /* width: 600px; */
-    background-color: lightpink;
+    background-color: var(--color-preto);
+    color: white;
 
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     padding: 10px 5px;
 
 }
@@ -38,6 +40,7 @@ img{
    display: flex;
    flex-direction: column;
    align-items: center;
+   position: relative;
 }
 .item-jogo > div img{
     width: 180px;
@@ -45,16 +48,36 @@ img{
 .item-jogo > div p{
     text-align: center;
 }
+.container-usuario{
+    border-right: 2px solid white;
+}
+.container-computador{
+    border-left: 2px solid white;
+
+}
+.box-pc{
+    margin: 10px 0;
+}
 .box-pc img{
-    width: 100px!important;
+    width: 90px!important;
+    height: 90px!important;
+}
+.box-pessoa{
+    margin: 10px 0;
 }
 .box-pessoa img{
-    width: 100px!important;
+    width: 90px!important;
+    height: 90px!important;    
 }
 .box-img{
+    min-width: 180px;
+    min-height: 180px;
+}
+.box-img img{
+ 
+    width: 70px;
+    
 
-    min-width: 200px;
-    min-height: 200px;
 }
 .container-jogadas img:hover{
     transform: scale(1.08);
@@ -71,7 +94,7 @@ img{
 .container-jogadas{
     display:flex;
     justify-content: space-around;
-    background-color: lightblue;
+    background: var(--color-preto);
     border-bottom: 4px solid white ;
 
 }
@@ -96,6 +119,22 @@ img{
     border-bottom: none;
     border-top: none; */
     padding: 0 10px;
+}
+.box-contador-valor{
+    background-color: purple;
+    color: white;
+    padding: 5px 15px;
+}
+#box-contador-usuario{
+    position: absolute;
+    top: 50px;
+    left: -35px;
+
+}
+#box-contador-computador{
+    position: absolute;
+    top : 50px;
+    right: -35px;
 }
 #lucasmofardini{
     position: absolute;
