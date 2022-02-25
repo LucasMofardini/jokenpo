@@ -57,6 +57,7 @@ export default function Jokenpo() {
         setPlacar(placarInicial);
         setJogadaUsuario(JogadaInicial);
         setjogadaComputador(JogadaInicial);
+        setVencedor({ quemVenceu: "", jogadaVencedora: "" });
     }
     const comparaJogadas = () => {
         // Esse && é por que o useEffect inicializa uma jogada no incicio, entao o && é para validar se nao é null;
@@ -64,6 +65,8 @@ export default function Jokenpo() {
         if (jogadaUsuario.nome === jogadaComputador.nome && jogadaUsuario.nome && jogadaComputador.nome) {
             //Empate
             setPlacar({ ...placar, empate: placar.empate += 1 });
+            setVencedor({ quemVenceu: "Empate", jogadaVencedora: "Empate" });
+
         }
         formasDeVencer.forEach((forma) => {
             //Verifica se o usuario foi vencedor
@@ -85,6 +88,7 @@ export default function Jokenpo() {
 
     return (
         <section className='section-jogo'>
+
 
             <div className='container-jogo'>
                 <a target="_blank" href="https://github.com/lucasmofardini"><p id="lucasmofardini">@lucasmofardini</p></a>
@@ -108,8 +112,7 @@ export default function Jokenpo() {
                     })}
 
                 </div>
-                {/* <p>{vencedor.quemVenceu}</p>
-                <p>{vencedor.jogadaVencedora}</p> */}
+
                 <div className='item-jogo'>
                     <div className='container-usuario'>
                         <div><p>voce</p></div>
@@ -120,6 +123,10 @@ export default function Jokenpo() {
                             <p>{` ${placar.usuario}  `} </p>
                         </div>
                     </div>
+                    {/* <div class="container-comparacao">
+                        <p>{vencedor.quemVenceu}</p>
+                        <p>{vencedor.jogadaVencedora}</p>
+                    </div> */}
                     <div className='container-computador'>
                         <div><p>computador</p></div>
                         <div className='box-pc'><img src={imagemComputador} /> </div>

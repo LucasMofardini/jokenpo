@@ -34,6 +34,8 @@ img{
     align-items: center;
     padding: 10px 5px;
 
+    position: relative;
+
 }
 .item-jogo > div{
    display: flex;
@@ -61,6 +63,10 @@ img{
 .box-pc img{
     width: 90px!important;
     height: 90px!important;
+
+    animation-duration: 3.2s;
+    animation-name: balanco-infinito;
+    animation-iteration-count: infinite;
 }
 .box-pessoa{
     margin: 10px 0;
@@ -68,6 +74,11 @@ img{
 .box-pessoa img{
     width: 90px!important;
     height: 90px!important;    
+    animation-duration: 3s;
+    animation-name: balanco-infinito;
+    animation-iteration-count: infinite;
+
+  
 }
 .box-img{
     min-width: 180px;
@@ -140,17 +151,25 @@ img{
     padding: 5px 15px;
 
     user-select: none;
+
+    
 }
 #box-contador-usuario{
     position: absolute;
     top: 50px;
     left: -35px;
+    animation-duration: 2.8s;
+    animation-name: balanco-infinito;
+    animation-iteration-count: infinite;
 
 }
 #box-contador-computador{
     position: absolute;
     top : 50px;
     right: -35px;
+    animation-duration: 3.4s;
+    animation-name: balanco-infinito;
+    animation-iteration-count: infinite;
 }
 #lucasmofardini{
     position: absolute;
@@ -160,5 +179,65 @@ img{
     color: white;
 
     user-select: none;
+
+    animation-duration: 5s;
+    animation-name: balanco-infinito-lado;
+    animation-iteration-count: infinite;
     
+}
+.container-comparacao{
+    position: absolute!important;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+@keyframes balanco-infinito {
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(5px);
+    }
+    /* 66%{
+        transform: translateY(-10px);
+    } */
+    100%{
+        transform: translateY(0);
+    }
+}
+@keyframes balanco-infinito-lado {
+    0%{
+        transform: translatex(0);
+        
+    }
+    50%{
+        transform: translatex(5px);
+
+    }
+    100%{
+        transform: translatex(0);
+    }
+}
+@media(max-width:500px){
+    body{
+        background-color: var(--color-roxo);
+    }
+    .section-jogo{
+        background-color: transparent;
+        height: auto;
+    }
+    .container-jogo{
+        margin: 40px 0;
+    }
+    #box-contador-usuario {
+        top: 30px;
+        left: 10px;
+    }
+    #box-contador-computador {
+        position: absolute;
+        top: 30px;
+        right: 10px;
+    }
 }
