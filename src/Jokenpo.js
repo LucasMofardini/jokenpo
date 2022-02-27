@@ -71,13 +71,13 @@ export default function Jokenpo() {
         formasDeVencer.forEach((forma) => {
             //Verifica se o usuario foi vencedor
             if (forma.jogador1 == jogadaUsuario.nome && forma.jogador2 == jogadaComputador.nome) {
-                console.log(forma.vencedor);
+                // console.log(forma.vencedor);
                 setPlacar({ ...placar, usuario: placar.usuario += 1 });
                 setVencedor({ quemVenceu: jogadaUsuario.nome, jogadaVencedora: "Voce" });
             }
             //Verifica se o computador foi vencedor
             if (forma.jogador1 == jogadaComputador.nome && forma.jogador2 == jogadaUsuario.nome) {
-                console.log(forma.vencedor);
+                // console.log(forma.vencedor);
                 setPlacar({ ...placar, computador: placar.computador += 1 });
                 setVencedor({ quemVenceu: jogadaComputador.nome, jogadaVencedora: "Computador" });
 
